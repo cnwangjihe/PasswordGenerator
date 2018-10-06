@@ -7,9 +7,11 @@ int m=0,n;
 
 int main(int argc,char* argv[])
 {
-
 	if (argc==1)
+	{
+		printf("Please enter the size of iv: ");
 		scanf("%d",&n);
+	}
 	else
 		n=atoi(argv[1]);
 	srand(time(0));

@@ -3,8 +3,17 @@ This is the repository for the executable part.
 
 ## How to build ##  
 First of all, you need to install [crypto++](https://github.com/weidai11/cryptopp).  
-Then use this command to build:  
-```g++ -std=c++11 main.cpp -o passwdg -Wall -Wextra -Wparentheses -O2 -DNDEBUG -I/usr/include/cryptopp -lcryptopp -lpthread```  
+Then build ```RandomBlockGenerator``` and use it to generate ```AES_CBC_iv```, ```Kalyna128_CBC_iv``` and ```Kalyna256_CBC_iv```:  
+```g++ -std=c++11 RandomBlockGenerator.cpp -O3 -o RandomBlockGenerator```  
+Their sizes are 16, 16 and 32.  
+Of course, you can use your own iv instead of generate a new one.  
+Put them in ```stdafx.h```.  
+
+The defualt alphabet of Base64 is "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?"  
+If you want to change one, please modify ```Base64BetterAlphabet``` in ```stdafx.h```.  
+
+At last, use this command to build:  
+```g++ -std=c++11 main.cpp -o passwdg -Wall -Wextra -Wparentheses -O3 -DNDEBUG -I/usr/include/cryptopp -lcryptopp -lpthread```  
 And you can ```sudo cp ./passwdg /usr/bin``` In order to make ```passwdg``` run anywhere.  
 
 ## Usage ##  
