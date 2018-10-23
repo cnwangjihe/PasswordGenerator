@@ -1,7 +1,3 @@
-#define LOGWARNING
-#define LOGINFO
-#define LOGDEBUG
-
 #include "stdafx.h"
 #include "hash.h"
 #include "encrypt.h"
@@ -11,6 +7,7 @@
 
 int level,n,type,len;
 string s,k,opt;
+bool _stdin = false;
 
 int main(int argc,char* argv[])
 {
@@ -38,12 +35,13 @@ int main(int argc,char* argv[])
 		cerr << "  7-> 80(54)\n";
 		cerr << "  8-> 96(64)\n";
 		cerr << "  9-> 128(86)\n\n";
-		cerr << "If type == 1 means you want the password to be presented in Base, and nothing or 0 means in Base64\n\n";
+		cerr << "If type == 1 means you want the password to be presented in Base64, and nothing or 0 means in Hex\n\n";
 	}
 
 	if (argc==1)
 	{
 		cerr << "You are using stdin now\n\n";
+		_stdin = true;
 		cin >> s >> k >> level >> len >> type;
 	}
 	else
@@ -67,15 +65,16 @@ int main(int argc,char* argv[])
 			LogDebug(to_string(type));
 		}
 	}
-
-	opt=GetOperationSequence(s+k,level);
-	n=opt.size();
-	for (int i=0;i<n;i++)
-		s=SelectAlgorithm(s,k,opt[i]);
-	s=CorrectLength(s,len);
-	if (type)
-		s=ChangeBase64Alphabet(EraseBase64Equalsign(Hex2Base64(s)),Base64BetterAlphabet);
-	cout << s << endl;
+	cout << GeneratePassword(s, k, level, len, type) << endl;
+	if (_stdin)
+	{
+		#ifdef _WIN32
+			system("pause");
+		#else
+			system("bash -c \"read -rsp $'Press any key to continue...\n' -n 1 key\"");
+		#endif
+	}
+	return 0;
 }
 
 // g++ -std=c++11 main.cpp -o main -Wall -Wextra -Wparentheses -O2 -DNDEBUG -I/usr/include/cryptopp -lcryptopp -lpthread

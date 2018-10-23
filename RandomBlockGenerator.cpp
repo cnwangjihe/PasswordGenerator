@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <stdio.h>
+#include <time.h>
+#include <string>
 
 using namespace std;
 

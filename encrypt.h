@@ -11,12 +11,12 @@ string AES_CBC_Encrypt(string input,string k)
 		LogError("The length of the AES key is NOT RIGHT");
 		return input;
 	}
-	byte key[length];
+	byte *key = new byte[length];
 	for (int i=0;i<length;i++)
 		key[i]=k[i];
 	string output;
 	HexEncoder* hex_enc = new HexEncoder(new StringSink(output));
-	CBC_Mode<AES>::Encryption aes(key, sizeof(key), AES_CBC_iv);
+	CBC_Mode<AES>::Encryption aes(key, length, AES_CBC_iv);
 	StreamTransformationFilter* aes_enc = new StreamTransformationFilter(aes, hex_enc);
 	StringSource source(input, true, aes_enc);
 	return output;
@@ -30,7 +30,7 @@ string AES_CBC_Decrypt(string input,string k)
 		LogError("The length of the AES key is NOT RIGHT");
 		return input;
 	}
-	byte key[length];
+	byte *key = new byte[length];
 	for (int i=0;i<length;i++)
 		key[i]=k[i];
 	string output;
@@ -53,7 +53,7 @@ string Kalyna128_CBC_Encrypt(string input,string k)
 		LogError("The length of the Kalyna128 key is NOT RIGHT");
 		return input;
 	}
-	byte key[length];
+	byte *key = new byte[length];
 	for (int i=0;i<length;i++)
 		key[i]=k[i];
 	string output;
@@ -73,7 +73,7 @@ string Kalyna128_CBC_Decrypt(string input,string k)
 		LogError("The length of the Kalyna128 key is NOT RIGHT");
 		return input;
 	}
-	byte key[length];
+	byte *key = new byte[length];
 	for (int i=0;i<length;i++)
 		key[i]=k[i];
 	string output;
@@ -96,7 +96,7 @@ string Kalyna256_CBC_Encrypt(string input,string k)
 		LogError("The length of the Kalyna256 key is NOT RIGHT");
 		return input;
 	}
-	byte key[length];
+	byte *key = new byte[length];
 	for (int i=0;i<length;i++)
 		key[i]=k[i];
 	string output;
@@ -116,7 +116,7 @@ string Kalyna256_CBC_Decrypt(string input,string k)
 		LogError("The length of the Kalyna256 key is NOT RIGHT");
 		return input;
 	}
-	byte key[length];
+	byte *key = new byte[length];
 	for (int i=0;i<length;i++)
 		key[i]=k[i];
 	string output;

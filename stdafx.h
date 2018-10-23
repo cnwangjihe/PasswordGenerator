@@ -6,11 +6,17 @@
 
 #define CRYPTOPP_ENABLE_NAMESPACE_WEAK 1
 
+#ifdef _MSC_VER
+#pragma comment(lib,"cryptlib.lib")
+#endif
+
+#include <iostream>
 #include <cryptopp/kalyna.h>
 #include <cryptopp/base64.h>
 #include <cryptopp/filters.h>
 #include <cryptopp/cryptlib.h>
-#include <bits/stdc++.h>
+#include <string>
+#include <stdio.h>
 #include <cryptopp/md5.h>
 #include <cryptopp/sha.h>
 #include <cryptopp/hex.h>

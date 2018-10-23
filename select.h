@@ -3,6 +3,7 @@
 #include "hash.h"
 #include "encrypt.h"
 #include "basic.h"
+#include "stdafx.h"
 
 #define ALG1 GETSHA512      //128
 #define ALG2 GETSHA256      //64
@@ -138,4 +139,18 @@ string SelectAlgorithm(string input,string& key,char type)
 	}
 	LogWarning(EmptyString+"The algorithm "+type+" do not exist, it should be between 0~F");
 	return input;
+}
+
+string GeneratePassword(string text, string key, int level, int len, int type = 0)
+{
+	string opt;
+	int n;
+	opt = GetOperationSequence(text + '&' + key, level);
+	n = opt.size();
+	for (int i = 0; i < n; i++)
+		text = SelectAlgorithm(text, key, opt[i]);
+	text = CorrectLength(text, len);
+	if (type)
+		text = ChangeBase64Alphabet(EraseBase64Equalsign(Hex2Base64(text)), Base64BetterAlphabet);
+	return text;
 }
