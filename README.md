@@ -12,9 +12,12 @@ Put them in ```stdafx.h```.
 The defualt alphabet of Base64 is "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?"  
 If you want to change one, please modify ```Base64BetterAlphabet``` in ```stdafx.h```.  
 
-At last, use this command to build:  
-```g++ -std=c++11 main.cpp -o passwdg -Wall -Wextra -Wparentheses -O3 -DNDEBUG -I/usr/include/cryptopp -lcryptopp -lpthread```  
-And you can ```sudo cp ./passwdg /usr/bin``` In order to make ```passwdg``` run anywhere.  
+At last, if you use linux, use this command to build:  
+```make```  
+Then you will get a program called ```passwdg```  
+If you want to install it to ```/usr/bin```, use ```sudo make install```.  
+
+If you use Windows, you can use Visual Studio 2017 to build it.  
 
 ## Usage ##  
 You can both use stdin mode and command line mode.  
