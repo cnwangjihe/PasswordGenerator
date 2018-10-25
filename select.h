@@ -145,7 +145,7 @@ string GeneratePassword(string text, string key, int level, int len, int type = 
 {
 	string opt;
 	int n;
-	opt = GetOperationSequence(text + '&' + key, level);
+	opt = GetOperationSequence(text + key, level);
 	n = opt.size();
 	for (int i = 0; i < n; i++)
 		text = SelectAlgorithm(text, key, opt[i]);
